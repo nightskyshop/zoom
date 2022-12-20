@@ -8,18 +8,30 @@ room.hidden = true;
 
 let roomName;
 
-function addMessage(message) {
-  const ul = room.querySelector("ul");
-  const li = document.createElement("li");
-  li.innerText = message;
-  ul.appendChild(li);
+function addMessage(message, isMe) {
+  const div1 = room.querySelector("ul");
+  div1.classList.add("wrap");
+
+  const div2 = document.createElement("div");
+  if (isMe) {
+    div2.classList.add("ch2", "chat");
+  } else {
+    div2.classList.add("ch1", "chat");
+  }
+  div1.appendChild(div2);
+
+  const div3 = document.createElement("div");
+  div3.classList.add("textbox");
+  div3.innerText = message;
+
+  div2.appendChild(div3)
 }
 
 function handleMessageSubmit(event) {
   event.preventDefault();
   const input = room.querySelector("#message input");
   socket.emit("new_message", input.value, roomName, () => {
-    addMessage(`You: ${input.value}`);
+    addMessage(`You: ${input.value}`, true);
     input.value = "";
   });
 }
@@ -62,6 +74,11 @@ socket.on("bye", (left, newCount) => {
   const h3 = room.querySelector("h3");
   h3.innerText = `Room ${roomName} (${newCount})`;
   addMessage(`${left} Left!`);
+});
+
+socket.on("room_count", (newCount) => {
+  const h3 = room.querySelector("h3");
+  h3.innerText = `Room ${roomName} (${newCount})`;
 });
 
 socket.on("new_message", addMessage);

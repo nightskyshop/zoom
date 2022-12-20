@@ -56,6 +56,7 @@ wsServer.on("connection", (socket) => {
     socket.to(roomName).emit("welcome", socket.nickname, countRoom(roomName));
     done();
     wsServer.sockets.emit("room_change", publicRooms());
+    socket.emit("room_count", countRoom(roomName));
   });
   socket.on("disconnecting", () => {
     socket.rooms.forEach((room) =>

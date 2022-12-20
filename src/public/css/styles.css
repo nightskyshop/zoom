@@ -1,0 +1,53 @@
+.wrap {
+    padding-left: 0;
+}
+
+.wrap .chat {
+    align-items: center;
+}
+
+.wrap .chat .textbox {
+    position: relative;
+    display: inline-block;
+    max-width: calc(100% - 70px);
+    padding: 10px;
+    margin-top: 7px;
+    font-size: 13px;
+    border-radius: 10px;
+}
+
+.wrap .chat .textbox::before {
+    position: absolute;
+    display: block;
+    top: 0;
+    font-size: 1.5rem;
+}
+
+.wrap .ch1 .textbox {
+    margin-left: 20px;
+    background-color: #ddd;
+    padding-top: 10px;
+    padding-bottom: 10px;
+}
+
+.wrap .ch1 .textbox::before {
+    left: -15px;
+    content: "◀";
+    color: #ddd;
+}
+
+.wrap .ch2 {
+    display: flex;
+    justify-content: flex-end;
+}
+
+.wrap .ch2 .textbox {
+    margin-right: 20px;
+    background-color: #ddd;
+}
+
+.wrap .ch2 .textbox::before {
+    right: -15px;
+    content: "▶";
+    color: #ddd;
+}
